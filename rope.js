@@ -29,7 +29,7 @@ class Rope
       this.body = null;
     }
     
-    show()
+    mostrar()
     {
       if(this.body!=null)
         {
@@ -43,7 +43,7 @@ class Rope
     drawVertices(vertices) 
     {
       beginShape();
-      fill('#FFF717')
+      fill('#f08b69')
       noStroke();
       
       for (let i = 0; i < vertices.length; i++) 
