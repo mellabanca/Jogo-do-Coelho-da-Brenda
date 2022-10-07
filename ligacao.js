@@ -11,4 +11,7 @@ class Ligacao{
         })
         World.add(engine.world,this.link);
     }
+    quebrar(){
+        World.remove(engine.world,this.link);
+    }
 }

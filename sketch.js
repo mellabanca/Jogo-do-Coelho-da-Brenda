@@ -17,11 +17,23 @@ var ligacao;
 var fundo;
 var comida;
 var coelho;
+var ricardao;
+var botao;
+var piscando;
+var comendo;
 
 function preload(){
   fundo = loadImage("./Imagens/background.png");
   comida = loadImage("./Imagens/melon.png");
   coelho = loadImage("./Imagens/Rabbit-01.png");
+  piscando = loadAnimation("./Imagens/blink_1.png","./Imagens/blink_2.png","./Imagens/blink_3.png");
+  comendo = loadAnimation("./Imagens/eat_0.png","./Imagens/eat_1.png","./Imagens/eat_2.png","./Imagens/eat_3.png","./Imagens/eat_4.png");
+
+  piscando.playing = true;
+  comendo.playing = true;
+
+  piscando.looping = true;
+  comendo.looping = false;
 }
 
 function setup() 
@@ -35,6 +47,9 @@ function setup()
   imageMode(CENTER);
   textSize(50);
 
+  piscando.frameDelay = 10;
+  comendo.frameDelay = 10;
+
   melancia = Bodies.circle(300,300,15);
 
   chao = new Chao(200,690,600,20);
@@ -42,6 +57,17 @@ function setup()
   ligacao = new Ligacao(corda,melancia);
   
   Matter.Composite.add(corda.body, melancia);
+  ricardao = createSprite(250,585,100,100);
+  ricardao.addImage(coelho);
+  ricardao.scale = 0.3;
+  ricardao.addAnimation("piscando", piscando);
+  ricardao.addAnimation("comendo", comendo);
+  ricardao.changeAnimation("piscando");
+
+  botao = createImg("./Imagens/cut_button.png");
+  botao.position(220,30);
+  botao.size(50,50);
+  botao.mouseClicked(quebrar);
 }
 
 function draw() 
@@ -51,9 +77,14 @@ function draw()
   Engine.update(engine);
   chao.mostrar();
   corda.mostrar();
+  drawSprites();
   image(comida,melancia.position.x, melancia.position.y, 100, 100);
 }
 
-
+function quebrar(){
+  corda.break();
+  ligacao.quebrar();
+  ligacao = null;
+}
 
 
