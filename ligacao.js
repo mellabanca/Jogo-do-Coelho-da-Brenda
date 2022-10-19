@@ -1,6 +1,6 @@
 class Ligacao{
     constructor(corpoA, corpoB){
-        var ultimo = corpoA.body.bodies.length-1;
+        var ultimo = corpoA.body.bodies.length-2;
         this.link = Constraint.create({
             bodyA:corpoA.body.bodies[ultimo],
             pointA:{x:0, y:0},
